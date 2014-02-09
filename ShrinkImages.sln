@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShrinkImages", "ShrinkImages\ShrinkImages.csproj", "{FFABA66E-CC81-478B-AA3C-834943DE758C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageShrinker", "ImageShrinker\ImageShrinker.csproj", "{88D1BDD5-822F-4EFB-AFDA-430A687B478B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFABA66E-CC81-478B-AA3C-834943DE758C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFABA66E-CC81-478B-AA3C-834943DE758C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFABA66E-CC81-478B-AA3C-834943DE758C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFABA66E-CC81-478B-AA3C-834943DE758C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D1BDD5-822F-4EFB-AFDA-430A687B478B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D1BDD5-822F-4EFB-AFDA-430A687B478B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D1BDD5-822F-4EFB-AFDA-430A687B478B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D1BDD5-822F-4EFB-AFDA-430A687B478B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
