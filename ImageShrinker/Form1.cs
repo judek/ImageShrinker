@@ -59,6 +59,34 @@ namespace ImageShrinker
 
         }
 
+        public static Image RotateImage(Image img, float rotationAngle)
+        {
+            //create an empty Bitmap image
+            Bitmap bmp = new Bitmap(img.Width, img.Height);
+
+            //turn the Bitmap into a Graphics object
+            using (Graphics gfx = Graphics.FromImage(bmp))
+            {
+                //now we set the rotation point to the center of our image
+                gfx.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
+
+                //now rotate the image
+                gfx.RotateTransform(rotationAngle);
+
+                gfx.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
+
+                //set the InterpolationMode to HighQualityBicubic so to ensure a high
+                //quality image once it is transformed to the specified size
+                gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+                //now draw our new image onto the graphics object
+                gfx.DrawImage(img, new Point(0, 0));
+            }
+
+            //return the image
+            return bmp;
+        }
+
         void ShrinkImages(int Width, string inputFolder, string outputFolder)
         {
             float newWidth = (float)Width;
