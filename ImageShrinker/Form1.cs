@@ -145,6 +145,7 @@ namespace ImageShrinker
                     {
                         oldImage = Image.FromFile(fileinfo.FullName);
 
+                        
                         if (oldImage.Width <= newWidth)
                         {
                             Console.WriteLine("Skipping " + fileinfo.Name + "...");

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShrinkImages", "ShrinkImages\ShrinkImages.csproj", "{FFABA66E-CC81-478B-AA3C-834943DE758C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageShrinker", "ImageShrinker\ImageShrinker.csproj", "{88D1BDD5-822F-4EFB-AFDA-430A687B478B}"
