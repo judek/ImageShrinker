@@ -254,9 +254,9 @@ namespace ImageShrinker
 
             
             OperationStart();
-            //Thread t = new Thread(ShrinkImagesThread);
-           // t.Start();
-           ShrinkImagesThread();
+            Thread t = new Thread(ShrinkImagesThread);
+            t.Start();
+            //ShrinkImagesThread();
         }
 
         private void buttonAbout_Click(object sender, EventArgs e)
