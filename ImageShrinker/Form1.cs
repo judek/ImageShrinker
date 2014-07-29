@@ -161,23 +161,19 @@ namespace ImageShrinker
                       
                             if ((Orientation == item.Id) || (Thumbnail_Orientation == item.Id))
                             {
-                               
-
-                                //3 = SHORT A 16-bit (2 -byte) unsigned integer,
-                                if (item.Type == 0x3)
+                              if (item.Type == 0x3)//3 = SHORT A 16-bit (2 -byte) unsigned integer,
                                 {
 
                                    byte test = item.Value[0];
 
-                                    if (test == 3)
+                                   if ((test == 8) || (test == 3) || (test == 5))
                                     {
                                         item.Value[0] = 0x01;
                                         item.Value[0] = 0x00;
                                     }
 
                                     if (Orientation == item.Id)
-                                        oldImageOrinentation = test;
-
+                                        oldImageOrinentation = test; //Set orientation to 1 will rotate image later
                                     
                                 }
                             }
@@ -189,10 +185,26 @@ namespace ImageShrinker
                         //directoryPath = System.IO.Path.GetDirectoryName(fileinfo.FullName);
                         directoryPath = outputFolder;
                         newName = directoryPath + "\\" + "s" + ((int)newWidth) + "-" + fileinfo.Name;
-                       
-                        if(true == checkBoxFixOrientation.Checked)
-                            if (3 == oldImageOrinentation)
-                                shrunkImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
+
+                        if (true == checkBoxFixOrientation.Checked)
+                        {
+                            switch (oldImageOrinentation)
+                            {
+                                case 8://->
+                                    shrunkImage.RotateFlip(System.Drawing.RotateFlipType.Rotate270FlipNone);
+                                    break;
+                                case 3:
+                                    shrunkImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
+                                    break;
+                                case 6:
+                                    shrunkImage.RotateFlip(System.Drawing.RotateFlipType.Rotate90FlipNone);
+                                    break;
+                                default:
+                                    break;
+                            }
+                                                             
+                        }
+                          
                         
                         shrunkImage.Save(newName, ImageFormat.Jpeg);
 
@@ -242,9 +254,9 @@ namespace ImageShrinker
 
             
             OperationStart();
-            Thread t = new Thread(ShrinkImagesThread);
-            t.Start();
-           //ShrinkImagesThread();
+            //Thread t = new Thread(ShrinkImagesThread);
+           // t.Start();
+           ShrinkImagesThread();
         }
 
         private void buttonAbout_Click(object sender, EventArgs e)
