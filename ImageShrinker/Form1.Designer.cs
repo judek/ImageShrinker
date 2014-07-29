@@ -40,6 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.labelStatus = new System.Windows.Forms.Label();
             this.buttonAbout = new System.Windows.Forms.Button();
+            this.checkBoxFixOrientation = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // textBoxInputFolder
@@ -76,7 +77,7 @@
             this.label2.Size = new System.Drawing.Size(439, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Output Folder (wil be created if it does not exist;any existing pictures here wil" +
-                "l be overwritten)";
+    "l be overwritten)";
             // 
             // buttonOuputBrowse
             // 
@@ -114,7 +115,7 @@
             // 
             // textBoxNewWidth
             // 
-            this.textBoxNewWidth.Location = new System.Drawing.Point(12, 161);
+            this.textBoxNewWidth.Location = new System.Drawing.Point(12, 149);
             this.textBoxNewWidth.Name = "textBoxNewWidth";
             this.textBoxNewWidth.Size = new System.Drawing.Size(40, 20);
             this.textBoxNewWidth.TabIndex = 8;
@@ -124,7 +125,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 142);
+            this.label3.Location = new System.Drawing.Point(9, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(319, 13);
             this.label3.TabIndex = 9;
@@ -133,12 +134,13 @@
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
+            this.labelStatus.ForeColor = System.Drawing.Color.Red;
             this.labelStatus.Location = new System.Drawing.Point(12, 237);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(451, 13);
             this.labelStatus.TabIndex = 10;
             this.labelStatus.Text = "This program has no warranties or guarantees;This program is not responsible for " +
-                "any damages";
+    "any damages";
             // 
             // buttonAbout
             // 
@@ -150,11 +152,24 @@
             this.buttonAbout.UseVisualStyleBackColor = true;
             this.buttonAbout.Click += new System.EventHandler(this.buttonAbout_Click);
             // 
+            // checkBoxFixOrientation
+            // 
+            this.checkBoxFixOrientation.AutoSize = true;
+            this.checkBoxFixOrientation.Checked = true;
+            this.checkBoxFixOrientation.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxFixOrientation.Location = new System.Drawing.Point(12, 175);
+            this.checkBoxFixOrientation.Name = "checkBoxFixOrientation";
+            this.checkBoxFixOrientation.Size = new System.Drawing.Size(112, 17);
+            this.checkBoxFixOrientation.TabIndex = 12;
+            this.checkBoxFixOrientation.Text = "Fix XIF Orientation";
+            this.checkBoxFixOrientation.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(475, 257);
+            this.Controls.Add(this.checkBoxFixOrientation);
             this.Controls.Add(this.buttonAbout);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.label3);
@@ -188,6 +203,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.Button buttonAbout;
+        private System.Windows.Forms.CheckBox checkBoxFixOrientation;
     }
 }
 

@@ -59,34 +59,11 @@ namespace ImageShrinker
 
         }
 
-        public static Image RotateImage(Image img, float rotationAngle)
-        {
-            //create an empty Bitmap image
-            Bitmap bmp = new Bitmap(img.Width, img.Height);
+     
+        static readonly int Thumbnail_Orientation = 0x5029;
+        static readonly int Orientation = 0x112;
 
-            //turn the Bitmap into a Graphics object
-            using (Graphics gfx = Graphics.FromImage(bmp))
-            {
-                //now we set the rotation point to the center of our image
-                gfx.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
-
-                //now rotate the image
-                gfx.RotateTransform(rotationAngle);
-
-                gfx.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
-
-                //set the InterpolationMode to HighQualityBicubic so to ensure a high
-                //quality image once it is transformed to the specified size
-                gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-                //now draw our new image onto the graphics object
-                gfx.DrawImage(img, new Point(0, 0));
-            }
-
-            //return the image
-            return bmp;
-        }
-
+        
         void ShrinkImages(int Width, string inputFolder, string outputFolder)
         {
             float newWidth = (float)Width;
@@ -116,11 +93,6 @@ namespace ImageShrinker
                 {
                     throw new Exception("Output folder error\r\n:" + exp.Message);
                 }
-
-
-               
-                
-
 
                 progressBar1.Maximum = pictures.Length;
                 progressBar1.Minimum = 0;
@@ -174,6 +146,8 @@ namespace ImageShrinker
                         oGraphic.SmoothingMode = SmoothingMode.HighQuality;
                         oGraphic.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
+                        byte oldImageOrinentation = 1;
+
 
                         //Set attribute of object "oGraphic" to rectangle of new smaller size (photo on canvas)
                         Rectangle rect = new Rectangle(0, 0, smallWidth, smallHeight);
@@ -183,13 +157,46 @@ namespace ImageShrinker
 
                         //Copy over jpeg meta data
                         foreach (PropertyItem item in oldImage.PropertyItems)
+                        {
+                      
+                            if ((Orientation == item.Id) || (Thumbnail_Orientation == item.Id))
+                            {
+                               
+
+                                //3 = SHORT A 16-bit (2 -byte) unsigned integer,
+                                if (item.Type == 0x3)
+                                {
+
+                                   byte test = item.Value[0];
+
+                                    if (test == 3)
+                                    {
+                                        item.Value[0] = 0x01;
+                                        item.Value[0] = 0x00;
+                                    }
+
+                                    if (Orientation == item.Id)
+                                        oldImageOrinentation = test;
+
+                                    
+                                }
+                            }
+                            
                             shrunkImage.SetPropertyItem(item);
+                        }
 
                         //Save as a JPEG
                         //directoryPath = System.IO.Path.GetDirectoryName(fileinfo.FullName);
                         directoryPath = outputFolder;
                         newName = directoryPath + "\\" + "s" + ((int)newWidth) + "-" + fileinfo.Name;
+                       
+                        if(true == checkBoxFixOrientation.Checked)
+                            if (3 == oldImageOrinentation)
+                                shrunkImage.RotateFlip(System.Drawing.RotateFlipType.Rotate180FlipNone);
+                        
                         shrunkImage.Save(newName, ImageFormat.Jpeg);
+
+
                     }
                     catch (Exception exp)
                     {
@@ -216,6 +223,7 @@ namespace ImageShrinker
         }
 
 
+       
         void ShrinkImagesThread()
         {
             ShrinkImages(Int32.Parse(textBoxNewWidth.Text),
@@ -236,6 +244,7 @@ namespace ImageShrinker
             OperationStart();
             Thread t = new Thread(ShrinkImagesThread);
             t.Start();
+           //ShrinkImagesThread();
         }
 
         private void buttonAbout_Click(object sender, EventArgs e)
