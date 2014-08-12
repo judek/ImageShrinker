@@ -158,9 +158,9 @@
             this.checkBoxFixOrientation.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxFixOrientation.Location = new System.Drawing.Point(12, 175);
             this.checkBoxFixOrientation.Name = "checkBoxFixOrientation";
-            this.checkBoxFixOrientation.Size = new System.Drawing.Size(230, 17);
+            this.checkBoxFixOrientation.Size = new System.Drawing.Size(242, 17);
             this.checkBoxFixOrientation.TabIndex = 12;
-            this.checkBoxFixOrientation.Text = "Fix orientation and reset XIF orientation Info";
+            this.checkBoxFixOrientation.Text = "Fix orientation and remove XIF orientation Info";
             this.checkBoxFixOrientation.UseVisualStyleBackColor = true;
             // 
             // Form1
