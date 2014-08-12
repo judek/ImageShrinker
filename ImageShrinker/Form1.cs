@@ -155,10 +155,10 @@ namespace ImageShrinker
                         //Draw the old photo in the new rectangle
                         oGraphic.DrawImage(oldImage, rect);
 
-                        //Copy over jpeg meta data
+
+                        //Copy over jpeg meta data (PropertyItems)
                         foreach (PropertyItem item in oldImage.PropertyItems)
                         {
-                      
                             if ((Orientation == item.Id) || (Thumbnail_Orientation == item.Id))
                             {
                               if (item.Type == 0x3)//3 = SHORT A 16-bit (2 -byte) unsigned integer,
@@ -166,21 +166,35 @@ namespace ImageShrinker
 
                                    byte test = item.Value[0];
 
-                                   if ((test == 8) || (test == 3) || (test == 5))
-                                    {
-                                        item.Value[0] = 0x01;
-                                        item.Value[0] = 0x00;
-                                    }
+                                   //Lets not write corrected orientation. We will remove orientation all together
+                                   //if ((test == 8) || (test == 3) || (test == 5))
+                                   // {
+                                   //     item.Value[0] = 0x01;
+                                   //     item.Value[1] = 0x00;
+                                   // }
 
                                     if (Orientation == item.Id)
-                                        oldImageOrinentation = test; //Set orientation to 1 will rotate image later
+                                        oldImageOrinentation = test; //note orientation will use later
                                     
                                 }
                             }
-                            
-                            shrunkImage.SetPropertyItem(item);
-                        }
 
+                         
+                            if (true == checkBoxFixOrientation.Checked)
+                            {
+                                //Do not copy to new image propety item if pertains to oritentation
+                                //As we will rotate image as need later
+                                if ((Orientation != item.Id) && (Thumbnail_Orientation != item.Id))
+                                    shrunkImage.SetPropertyItem(item);
+                            }
+                            else
+                            {
+                                shrunkImage.SetPropertyItem(item);
+                            }
+                        }// foreach PropertyItem item
+
+                        
+                        
                         //Save as a JPEG
                         //directoryPath = System.IO.Path.GetDirectoryName(fileinfo.FullName);
                         directoryPath = outputFolder;
@@ -253,10 +267,10 @@ namespace ImageShrinker
             }
 
             
-            OperationStart();
-            Thread t = new Thread(ShrinkImagesThread);
-            t.Start();
-            //ShrinkImagesThread();
+           // OperationStart();
+           // Thread t = new Thread(ShrinkImagesThread);
+            //t.Start();
+           ShrinkImagesThread();
         }
 
         private void buttonAbout_Click(object sender, EventArgs e)

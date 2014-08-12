@@ -74,10 +74,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(16, 80);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(439, 13);
+            this.label2.Size = new System.Drawing.Size(227, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Output Folder (wil be created if it does not exist;any existing pictures here wil" +
-    "l be overwritten)";
+            this.label2.Text = "Output Folder (wil be created if it does not exist";
             // 
             // buttonOuputBrowse
             // 
